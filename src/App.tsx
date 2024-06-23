@@ -1,11 +1,20 @@
-import {Home} from "./pages/Home";
+import {Home} from "./components/Home";
+import {NewNote} from "./components/NewNote";
+import { Container } from "react-bootstrap";
+import {Routes, Route, Navigate} from "react-router-dom";
 
-import {Routes, Route} from "react-router-dom";
-
-export function App() {
+export default function App() {
   return (
-    <Routes> 
-      <Route path="/" element={<Home />} />
-    </Routes>
+    <Container className="my-4">
+    	<Routes> 
+      	<Route path="/" element={<Home />} />
+      	<Route path="/new" element={<NewNote />} />
+      	<Route path= "/:id" >
+        	<Route index element={<h1>Show</h1>} />
+        	<Route path="edit" element={ <h1>Edit</h1> } />
+      	</Route>
+      	<Route path="*" element={<Navigate to="/" />} />
+    	</Routes>
+    </Container>
   )
 }
