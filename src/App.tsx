@@ -1,5 +1,6 @@
 import {Home} from "./components/Home";
 import {NewNote} from "./components/NewNote";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
 import {Routes, Route, Navigate} from "react-router-dom";
 
