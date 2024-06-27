@@ -3,15 +3,13 @@ import { Link } from "react-router-dom";
 import {useRef, useState} from "react";
 import CreatableReactSelect from "react-select/creatable";
 import {NoteData,Tag} from "../App"
-import {useLocalStorage} from "../hooks/useLocalStorage";
  
 type NoteFormProps = {
 	onSubmit: (note: NoteData) => void;
 }
 
 export const NoteForm = ( {onSubmit}: NoteFormProps) => {
-	const [selectedTags, setSelectedTags] = useLocalStorage<Tag[]>("TAGS", []);
-	const [notes, setNotes] = useLocalStorage<NoteData[]>("NOTES", []);
+	const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
 	const titleRef =  useRef<HTMLInputElement>(null);
 	const markdownRef = useRef<HTMLTextAreaElement>(null);
 	const handleSubmit = (e: React.FormEvent  ) => {
