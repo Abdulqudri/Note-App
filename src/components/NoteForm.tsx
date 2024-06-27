@@ -2,12 +2,16 @@ import {Button, Form, Stack, Row,Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import {useRef, useState} from "react";
 import CreatableReactSelect from "react-select/creatable";
-import {useNoteContext} from "../context/NoteAppContext";
+import {NoteData,Tag} from "../App"
+import {useLocalStorage} from "../hooks/useLocalStorage";
+ 
+type NoteFormProps = {
+	onSubmit: (note: NoteData) => void;
+}
 
-
-
-export const NoteForm = ( ) => {
-	const { selectedTags } = useNoteContext();
+export const NoteForm = ( {onSubmit}: NoteFormProps) => {
+	const [selectedTags, setSelectedTags] = useLocalStorage<Tag[]>("TAGS", []);
+	const [notes, setNotes] = useLocalStorage<NoteData[]>("NOTES", []);
 	const titleRef =  useRef<HTMLInputElement>(null);
 	const markdownRef = useRef<HTMLTextAreaElement>(null);
 	const handleSubmit = (e: React.FormEvent  ) => {
@@ -33,24 +37,28 @@ export const NoteForm = ( ) => {
 						<Form.Group controlId="tag">
 							<Form.Label>Tag</Form.Label>
 							<CreatableReactSelect value={selectedTags.map(tag => {
-							return {
+							return({
 							label: tag.label,
 							value: tag.id
+							})
+							})} onChange={tags => {
+							setSelectedTags(tags.map(tag => {
+								return({
+									label: tag.label,
+									id: tag.value
+								})
+							}))
 							}
-							}) } onChange={tags => {
-		setSelectedTags(tags.map(tag => {
-			return {
-			label: tag.label,
-			id: tag.value
-			}
-		}))
-							}} isMulti required  />
+  }
+  isMulti 
+  required  
+/>
 						</Form.Group>
 					</Col>
 				</Row>
 				<Form.Group controlId="markdown">
 					<Form.Label>Body</Form.Label>
-					<Form.Control as="textarea" required rows="15" ref={markdownRef}/>
+					<Form.Control as="textarea" required rows={15} ref={markdownRef}/>
 				</Form.Group>
 				<Stack gap={2} direction="horizontal" className="justify-content-end"  >
 					<Button variant="primary" type="submit">Save</Button>
