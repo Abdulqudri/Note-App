@@ -38,20 +38,23 @@ export default function App() {
       return { ...note, tags: tags.filter(tag => note.tagIds.includes(tag.id)) }
     })
   },[notes,tags])
-  const onCreateNote = ({tags, ...notes}: NoteData) => {
+  const onCreateNote = ({tags, ...data}: NoteData) => {
     setNotes(prevNote => {
       return [...prevNote, {
         id: uuidv4(),
-        ...notes,
+        ...data,
         tagIds: tags.map(tag => tag.id)
       }]
     })
-  }yuy
+  }
+  const addTag = (tag: Tag) => {
+  	setTags(prev => [...prev, tag])
+  }
   return (
     <Container className="my-4">
     	<Routes> 
       	<Route path="/" element={<Home />} />
-      	<Route path="/new" element={<NewNote />} />
+      	<Route path="/new" element={<NewNote onSubmit={onCreateNote} onAddTag={addTag} availableTags={tags} />} />
       	<Route path= "/:id" >
         	<Route index element={<h1>Show</h1>} />
         	<Route path="edit" element={ <h1>Edit</h1> } />
