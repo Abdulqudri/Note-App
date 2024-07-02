@@ -2,17 +2,13 @@ import {Button, Form, Stack, Row,Col } from "react-bootstrap";
 import { Link,useNavigate } from "react-router-dom";
 import {useRef, useState} from "react";
 import CreatableReactSelect from "react-select/creatable";
-import {NoteData,Tag} from "../App"
 import {v4 as uuidv4} from "uuid";
+import {useNoteApp, Tag} from "../context/NoteAppContext";
 
  
-type NoteFormProps = {
-	onSubmit: (note: NoteData) => void;
-	onAddTag: (tag: Tag) => void;
-	availableTags: Tag[];
-}
 
-export const NoteForm = ( {onSubmit, onAddTag,availableTags}: NoteFormProps) => {
+export const NoteForm = () => {
+	const {onSubmit,onAddTag,tags} = useNoteApp();
 	const navigate = useNavigate();
 	const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
 	const titleRef =  useRef<HTMLInputElement>(null);
@@ -48,7 +44,7 @@ export const NoteForm = ( {onSubmit, onAddTag,availableTags}: NoteFormProps) => 
 										setSelectedTags(prev => [...prev, newTag])
 									}
 								}
-								options={availableTags.map(tag => {
+								options={tags.map(tag => {
 									return {
 									value: tag.id,
 									label: tag.label
