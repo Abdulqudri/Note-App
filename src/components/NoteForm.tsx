@@ -1,16 +1,15 @@
 import {Button, Form, Stack, Row,Col } from "react-bootstrap";
 import { Link,useNavigate } from "react-router-dom";
-import {useRef, useState} from "react";
+import {useRef} from "react";
 import CreatableReactSelect from "react-select/creatable";
 import {v4 as uuidv4} from "uuid";
-import {useNoteApp, Tag} from "../context/NoteAppContext";
+import {useNoteApp} from "../context/NoteAppContext";
 
  
 
 export const NoteForm = () => {
-	const {onSubmit,onAddTag,tags} = useNoteApp();
+	const {selectedTags, setSelectedTags,onSubmit,onAddTag,tags} = useNoteApp();
 	const navigate = useNavigate();
-	const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
 	const titleRef =  useRef<HTMLInputElement>(null);
 	const markdownRef = useRef<HTMLTextAreaElement>(null);
 	const handleSubmit = (e: React.FormEvent  ) => {

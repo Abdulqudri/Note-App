@@ -1,5 +1,5 @@
-import {Home} from "./components/Home";
 import {NewNote} from "./components/NewNote";
+import {NoteList} from "./components/NoteList";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
 import {Routes, Route, Navigate} from "react-router-dom";
@@ -13,7 +13,7 @@ export default function App() {
     <NoteAppProvider>
     <Container className="my-4">
     	<Routes> 
-      	<Route path="/" element={<Home />} />
+      	<Route path="/" element={<NoteList/>} />
       	<Route path="/new" element={<NewNote />} />
       	<Route path= "/:id" >
         	<Route index element={<h1>Show</h1>} />

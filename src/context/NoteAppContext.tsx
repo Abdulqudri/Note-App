@@ -9,6 +9,10 @@ type NoteAppContext = {
 	onSubmit: (note: NoteData) => void;
 	onAddTag: (tag: Tag) => void;
 	tags: Tag[];
+	selectedTags: Tag[];
+	setSelectedTags: React.Dispatch<React.SetStateAction<Tag[]>>;
+	notes: RawNote[];
+	noteWithTags: Note[];
 }
 export type RawNote = {
 	id: string;
@@ -40,8 +44,9 @@ export const useNoteApp = () => {
 
 export const NoteAppProvider = ({children}:NoteAppProviderProps) =>{
 
+	const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
 	const [tags, setTags] = useLocalStorage<Tag[]>("TAGS", []);
-	const [notes, setNotes] = useLocalStorage<RawNoteData[]>("NOTES", []);
+	const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES", []);
 	const noteWithTags = useMemo(() => {
 		return notes.map(note => {
 			return { ...note, tags: tags.filter(tag => note.tagIds.includes(tag.id)) }
@@ -61,7 +66,7 @@ export const NoteAppProvider = ({children}:NoteAppProviderProps) =>{
 	}
 	
 	return(
-		<noteAppContext.Provider value={{ onSubmit, onAddTag, tags}}>
+		<noteAppContext.Provider value={{noteWithTags,notes,selectedTags, setSelectedTags, onSubmit, onAddTag, tags}}>
 			{children}
 		</noteAppContext.Provider>
 	)
