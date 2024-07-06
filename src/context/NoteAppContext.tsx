@@ -1,6 +1,7 @@
 import {createContext, useContext, useState,useMemo} from "react";
 import {v4 as uuidv4} from "uuid";
 import {useLocalStorage} from "../hooks/useLocalStorage";
+import {useOutletContext} from "react-router-dom";
 
 type NoteAppProviderProps = {
 	children: React.ReactNode;
@@ -40,6 +41,9 @@ const noteAppContext = createContext({} as NoteAppContext)
 export const useNoteApp = () => {
 	
 	return useContext(noteAppContext)
+}
+export const useNote = () => {
+	return useOutletContext<Note>()
 }
 
 export const NoteAppProvider = ({children}:NoteAppProviderProps) =>{
