@@ -1,4 +1,5 @@
 import {NewNote} from "./components/NewNote";
+import {EditNote} from "./components/EditNote";
 import {NoteList} from "./components/NoteList";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
@@ -19,7 +20,7 @@ export default function App() {
       	<Route path="/new" element={<NewNote />} />
       	<Route path= "/:id" element={<NoteLayout />} >
         	<Route index element={<Note />} />
-        	<Route path="edit" element={ <h1>Edit</h1> } />
+        	<Route path="edit" element={ <EditNote /> } />
       	</Route>
       	<Route path="*" element={<Navigate to="/" />} />
     	</Routes>

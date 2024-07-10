@@ -1,12 +1,13 @@
 import {useNote} from "../context/NoteAppContext";
 import {Col , Row, Stack, Button, Badge} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import ReactMarkdown from "react-markdown";
 
 
 export const Note = () => {
 	const note = useNote();
 	return <>
-		<Row>
+		<Row className="align-items-center mb-4" >
 			<Col>
 				<h1>{note.title}</h1>
 				{note.tags.length > 0 && (
@@ -23,5 +24,6 @@ export const Note = () => {
 				</Stack>
 			</Col>
 		</Row>
+		<ReactMarkdown>{note.markdown}</ReactMarkdown>
 	</>
 }
