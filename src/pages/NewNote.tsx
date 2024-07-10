@@ -1,4 +1,4 @@
-import {NoteForm} from "./NoteForm";
+import {NoteForm} from "../components/NoteForm";
 
 export const NewNote = () => {
 	return (<>

@@ -7,6 +7,6 @@ export const NoteLayout = ( ) => {
 	const {id} = useParams();
 	const note = noteWithTags.find(note => note.id === id);
 	if (note == null) return <Navigate to="/" replace />
-	
+
 	return <Outlet context={note} />
 }

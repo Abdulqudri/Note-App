@@ -10,7 +10,7 @@ export const Note = () => {
 	const navigate = useNavigate();
 	return <>
 		<Row className="align-items-center mb-4" >
-			<Col>
+			<Col xs="auto">
 				<h1>{note.title}</h1>
 				{note.tags.length > 0 && (
 				<Stack gap={1}  direction="horizontal"className="text-wrap">{note.tags.map(tag => (

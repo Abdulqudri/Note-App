@@ -1,12 +1,12 @@
-import {NewNote} from "./components/NewNote";
-import {EditNote} from "./components/EditNote";
-import {NoteList} from "./components/NoteList";
+import {NewNote} from "./pages/NewNote";
+import {EditNote} from "./pages/EditNote";
+import {NoteList} from "./pages/NoteList";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
 import {Routes, Route, Navigate} from "react-router-dom";
 import {NoteAppProvider} from "./context/NoteAppContext";
-import {NoteLayout} from "./components/NoteLayout";
-import {Note} from "./components/Note";
+import {NoteLayout} from"./pages/NoteLayout";
+import {Note} from "./pages/Note";
 
 
 

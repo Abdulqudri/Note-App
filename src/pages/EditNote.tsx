@@ -1,4 +1,4 @@
-import {EditNoteForm} from "./EditNoteForm";
+import {EditNoteForm} from "../components/EditNoteForm";
 
 export const EditNote = () => {
 	return (<>

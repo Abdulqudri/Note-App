@@ -1,4 +1,4 @@
-import {NoteCard} from "./NoteCard";
+import {NoteCard} from "../components/NoteCard";
 import {Row,Col,Button,Stack,Form} from "react-bootstrap";
 import {useNoteApp} from "../context/NoteAppContext";
 import ReactSelect from "react-select";
@@ -14,14 +14,14 @@ export const NoteList = () => {
 		})
 	}, [noteWithTags,title,selectedTags])
 	return <>
-		
+
 		<Row className="align-items-center mb-4">
 			<Col><h1>Note</h1></Col>
 			<Col xs="auto">
 				<Stack direction="horizontal" gap={2}>
 					<Button variant="primary" as={Link} to="/new">Create</Button>
 					<Button variant="outline-secondary">Edit Tags</Button>
-				</Stack>
+</Stack>
 			</Col>
 		</Row>
 		<Form>
@@ -30,13 +30,13 @@ export const NoteList = () => {
 					<Form.Group controlId="title">
 						<Form.Label>Title</Form.Label>
 						<Form.Control required type="text" value={title}
- onChange={e => {
-			setTitle(e.target.value)
+						onChange={e => {
+						setTitle(e.target.value)
 						}}/>
-					</Form.Group>
-				</Col>
-				<Col>
-					<Form.Group controlId="tag">
+						</Form.Group>
+						</Col>
+						<Col>
+						<Form.Group controlId="tag">
 						<Form.Label>Tag</Form.Label>
 						<ReactSelect 
 							options={tags.map(tag => {
@@ -56,22 +56,22 @@ export const NoteList = () => {
 								label: tag.label,
 								id: tag.value
 							})
-						}))
-						}
-				}
-				isMulti 
-				required  
-				/>
-					</Form.Group>
-				</Col>
-			</Row>
-		</Form>
-		<Row xs={1} sm={2} lg={3} xl={4}  className="gap-4">
-			{filteredNotes.map(note => (
-		<Col key={note.id}>
-			<NoteCard id={note.id} title={note.title} tags={note.tags}/>
-		</Col>
-			))}
-		</Row>
-	</>
+							}))
+							}
+							}
+							isMulti 
+							required  
+							/>
+							</Form.Group>
+							</Col>
+							</Row>
+							</Form>
+							<Row xs={1} sm={2} lg={3} xl={4}  className="gap-4">
+							{filteredNotes.map(note => (
+							<Col key={note.id}>
+							<NoteCard id={note.id} title={note.title} tags={note.tags}/>
+							</Col>
+							))}
+							</Row>
+							</>
 }
