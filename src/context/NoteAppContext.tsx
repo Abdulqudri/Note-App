@@ -8,6 +8,8 @@ type NoteAppProviderProps = {
 }
 type NoteAppContext = {
 	onSubmit: (note: NoteData) => void;
+	onDelete: (id: string) => void;
+	
 	onUpdateNote: (id: string, note: NoteData) => void;
 	onAddTag: (tag: Tag) => void;
 	tags: Tag[];
@@ -81,12 +83,17 @@ export const NoteAppProvider = ({children}:NoteAppProviderProps) =>{
 			})
 		})
 	}
+	const onDelete = (id: string) => {
+		setNotes(prevNote => {
+			return prevNote.filter(note => note.id !== id)
+		})
+	}
 	const onAddTag = (tag: Tag) => {
 		setTags(prev => [...prev, tag])
 	}
 	
 	return(
-		<noteAppContext.Provider value={{noteWithTags,notes,selectedTags, setSelectedTags, onSubmit, onUpdateNote,onAddTag, tags}}>
+		<noteAppContext.Provider value={{onDelete,noteWithTags,notes,selectedTags, setSelectedTags, onSubmit, onUpdateNote,onAddTag, tags}}>
 			{children}
 		</noteAppContext.Provider>
 	)

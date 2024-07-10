@@ -20,7 +20,7 @@ export const NoteList = () => {
 			<Col xs="auto">
 				<Stack direction="horizontal" gap={2}>
 					<Button variant="primary" as={Link} to="/new">Create</Button>
-					<Button variant="outline-secondary">Edit it</Button>
+					<Button variant="outline-secondary">Edit Tags</Button>
 				</Stack>
 			</Col>
 		</Row>
