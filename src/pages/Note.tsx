@@ -9,7 +9,7 @@ export const Note = () => {
 	const {onDelete} = useNoteApp();
 	const navigate = useNavigate();
 	return <>
-		<Row className="align-items-center mb-4" >
+		<Row className="align-items-center mb-4 justify-content-between" >
 			<Col xs="auto">
 				<h1>{note.title}</h1>
 				{note.tags.length > 0 && (

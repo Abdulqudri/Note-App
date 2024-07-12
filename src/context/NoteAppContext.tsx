@@ -7,6 +7,8 @@ type NoteAppProviderProps = {
 	children: React.ReactNode;
 }
 type NoteAppContext = {
+	deleteTags: (id: string) => void;
+	updateTags: (id: string, label: string) => void;
 	onSubmit: (note: NoteData) => void;
 	onDelete: (id: string) => void;
 	
@@ -91,9 +93,40 @@ export const NoteAppProvider = ({children}:NoteAppProviderProps) =>{
 	const onAddTag = (tag: Tag) => {
 		setTags(prev => [...prev, tag])
 	}
+	const deleteTags = (id: string) => {
+		setTags(prev => (
+			prev.filter(tag => tag.id !== id)
+		))
+	}
+
+	const updateTags = (id: string, label:string) => {
+		setTags(prev => {
+			return prev.map(tag => {
+				if (tag.id === id) {
+					return {...tag, label}
+				}else {
+					return tag;
+				}
+			})
+		}
+		
+			
+		)
+	}
 	
 	return(
-		<noteAppContext.Provider value={{onDelete,noteWithTags,notes,selectedTags, setSelectedTags, onSubmit, onUpdateNote,onAddTag, tags}}>
+		<noteAppContext.Provider value={{
+		 onDelete,
+	   noteWithTags,
+		 notes,
+		 selectedTags,
+		 setSelectedTags,
+		 onSubmit,
+		 onUpdateNote,
+		 onAddTag,											 tags,
+		 updateTags,
+		 deleteTags
+		}}>
 			{children}
 		</noteAppContext.Provider>
 	)

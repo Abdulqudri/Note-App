@@ -1,4 +1,5 @@
 import {NoteCard} from "../components/NoteCard";
+import {EditTagModal} from "../components/EditTagModal";
 import {Row,Col,Button,Stack,Form} from "react-bootstrap";
 import {useNoteApp} from "../context/NoteAppContext";
 import ReactSelect from "react-select";
@@ -8,6 +9,7 @@ import {useState, useMemo} from "react";
 export const NoteList = () => {
 	const {noteWithTags,selectedTags, setSelectedTags,tags} = useNoteApp();
 	const [title,setTitle] = useState("");
+	const [show, setShow] = useState(false);
 	const filteredNotes = useMemo(() => {
 		return noteWithTags.filter(note => {
 			return (title === "" || note.title.toLowerCase().includes(title.toLowerCase())) && (selectedTags.length === 0 || selectedTags.every(tag => note.tags.some(noteTag => noteTag.id === tag.id)))
@@ -20,7 +22,7 @@ export const NoteList = () => {
 			<Col xs="auto">
 				<Stack direction="horizontal" gap={2}>
 					<Button variant="primary" as={Link} to="/new">Create</Button>
-					<Button variant="outline-secondary">Edit Tags</Button>
+					<Button variant="outline-secondary" onClick={()=>{setShow(true)}}>Edit Tags</Button>
 </Stack>
 			</Col>
 		</Row>
@@ -73,5 +75,6 @@ export const NoteList = () => {
 							</Col>
 							))}
 							</Row>
+		<EditTagModal show={show} handleClose={() => {setShow(false)}}/>
 							</>
 }
